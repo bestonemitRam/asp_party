@@ -5,6 +5,7 @@ import 'package:aps_party/view/hom.dart';
 import 'package:aps_party/view/reels.dart';
 import 'package:aps_party/view/seacrh.dart';
 import 'package:aps_party/view/userprofile.dart';
+import 'package:aps_party/view/video_player/video_player.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/mytheme.dart';
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> pages = [
-    Home(),
+    DraggableWidget(),
     Search(),
     AddPage(),
     Reels(),
@@ -32,10 +33,8 @@ class _HomePageState extends State<HomePage> {
   ];
 
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
-     
       backgroundColor: Colors.black,
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.black,
