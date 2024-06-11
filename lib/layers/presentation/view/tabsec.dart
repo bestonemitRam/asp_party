@@ -1,7 +1,7 @@
-import 'package:aps_party/view/seacrh.dart';
+import 'package:aps_party/layers/presentation/view/seacrh.dart';
 import 'package:flutter/material.dart';
 
-import '../model/profiledata.dart';
+import '../../domain/entity/model/profiledata.dart';
 
 class TabSec extends StatelessWidget {
   const TabSec({super.key});

@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:aps_party/model/profiledata.dart';
-import 'package:aps_party/view/home_widget/treanding%20_photos.dart';
-import 'package:aps_party/view/sidemenu/drawer.dart';
+import 'package:aps_party/layers/domain/entity/model/profiledata.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/treanding%20_photos.dart';
+import 'package:aps_party/layers/presentation/view/sidemenu/drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

@@ -1,4 +1,4 @@
-package com.example.aps_party
+package com.app.asp_party
 
 import io.flutter.embedding.android.FlutterActivity
 

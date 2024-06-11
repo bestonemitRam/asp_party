@@ -1,11 +1,47 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:aps_party/view/homepage.dart';
+import 'package:aps_party/DefaultFirebaseOptions.dart';
+import 'package:aps_party/layers/presentation/view/homepage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-void main() {
+final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print('Handling a background message ${message}   ${message.data}');
+  print("dsfmlkdsfglk ${message.data}");
+}
+
+Future<void> main() async {
+  allInitialize();
+
   runApp(const MyApp());
+}
+
+Future<void> allInitialize() async {
+  await Firebase.initializeApp();
+
+  await Firebase.initializeApp(
+    name: 'shortnews',
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  _firebaseMessaging.subscribeToTopic('shotnews');
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  var status = await Permission.ignoreBatteryOptimizations.status;
+  if (!status.isGranted) {
+    var status = await Permission.ignoreBatteryOptimizations.request();
+    if (status.isGranted) {
+      debugPrint("Good, all your permission are granted, do some stuff");
+    } else {
+      debugPrint("Do stuff according to this permission was rejected");
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -24,6 +60,8 @@ class MyApp extends StatelessWidget {
     });
   }
 }
+
+
 
 
 
@@ -86,7 +124,6 @@ class MyApp extends StatelessWidget {
 //         ),
 //       ),
 //     );
- 
  
 //   }
 // }

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:aps_party/model/profiledata.dart';
+import 'package:aps_party/layers/domain/entity/model/profiledata.dart';
 import 'package:flutter/material.dart';
 
 

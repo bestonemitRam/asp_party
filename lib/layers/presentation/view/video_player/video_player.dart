@@ -1,6 +1,6 @@
-import 'package:aps_party/model/profiledata.dart';
-import 'package:aps_party/view/home_widget/treanding%20_photos.dart';
-import 'package:aps_party/view/sidemenu/drawer.dart';
+import 'package:aps_party/layers/domain/entity/model/profiledata.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/treanding%20_photos.dart';
+import 'package:aps_party/layers/presentation/view/sidemenu/drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -115,7 +115,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                     right: 0,
                     child: CarouselSlider(
                       options: CarouselOptions(
-                        height: 20.h,
+                        height: 30.h,
                         aspectRatio: 16 / 9,
                         viewportFraction: 0.8,
                         initialPage: 0,
@@ -134,7 +134,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                             (item) => Column(
                               children: [
                                 Container(
-                                  height: 150,
+                                  height: 25.h,
                                   width: MediaQuery.of(context).size.width,
                                   margin:
                                       EdgeInsets.only(left: 10.0, right: 10),
@@ -152,11 +152,12 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                     ),
                   ),
                   Positioned(
-                    top: 53.h,
+                    top: 58.h,
                     left: 0,
                     right: 0,
+                    // bottom: 1.h,
                     child: SizedBox(
-                      height: 1000,
+                      height: 10000,
                       child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         physics: const NeverScrollableScrollPhysics(),
@@ -184,7 +185,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                     ),
                   ),
                   Positioned(
-                    top: 37.h,
+                    top: 42.h,
                     left: 0,
                     right: 0,
                     child: SizedBox(
@@ -234,7 +235,8 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          height: 150,
+                          // height: 150,
+                          width: MediaQuery.of(context).size.width,
                           child: YoutubePlayer(
                             controller: _controller,
                             showVideoProgressIndicator: true,
@@ -289,26 +291,34 @@ class _DraggableWidgetState extends State<DraggableWidget> {
 class ShowItemValue extends StatelessWidget {
   final UserProfile userStory;
   const ShowItemValue({super.key, required this.userStory});
+  String getThumbnailUrl(String videoUrl) {
+    final uri = Uri.parse(videoUrl);
+    final videoId = uri.queryParameters['v'] ?? uri.pathSegments.last;
+    return 'https://img.youtube.com/vi/$videoId/hqdefault.jpg';
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 04, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: .3, vertical: 10),
           child: Container(
-            height: 90,
+            height: 19.h,
             width: MediaQuery.of(context).size.width / 2,
             margin: EdgeInsets.only(left: 10.0, right: 10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: Colors.white,
                 image: DecorationImage(
-                    image: AssetImage(userStory.url), fit: BoxFit.fill)),
+                    //  image: AssetImage(userStory.url),
+                    image: NetworkImage(getThumbnailUrl(
+                        'https://www.youtube.com/watch?v=umhl2hakkcY&t=23s')),
+                    fit: BoxFit.cover)),
           ),
         ),
         Positioned(
-          left: 10.h,
+          left: 12.h,
           top: 3.5.h,
           child: Container(
             width: 52.62,

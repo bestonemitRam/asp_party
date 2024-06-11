@@ -1,4 +1,4 @@
-import 'package:aps_party/model/profiledata.dart';
+import 'package:aps_party/layers/domain/entity/model/profiledata.dart';
 import 'package:flutter/material.dart';
 
 class TreandingPhotos extends StatelessWidget {

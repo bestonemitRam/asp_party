@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:aps_party/view/addpage.dart';
-import 'package:aps_party/view/hom.dart';
-import 'package:aps_party/view/reels.dart';
-import 'package:aps_party/view/seacrh.dart';
-import 'package:aps_party/view/userprofile.dart';
-import 'package:aps_party/view/video_player/video_player.dart';
+import 'package:aps_party/layers/presentation/view/addpage.dart';
+import 'package:aps_party/layers/presentation/view/hom.dart';
+import 'package:aps_party/layers/presentation/view/reels.dart';
+import 'package:aps_party/layers/presentation/view/seacrh.dart';
+import 'package:aps_party/layers/presentation/view/userprofile.dart';
+import 'package:aps_party/layers/presentation/view/video_player/video_player.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/mytheme.dart';
+import '../../data/utils/mytheme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

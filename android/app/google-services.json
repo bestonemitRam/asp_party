@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "906143797063",
+    "project_id": "asparty-1329b",
+    "storage_bucket": "asparty-1329b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906143797063:android:1eee04f1cc8f595c5b4662",
+        "android_client_info": {
+          "package_name": "com.app.asp_party"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw5a6nnFo28ax4z8BawAv4qc4T3vzvfJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
