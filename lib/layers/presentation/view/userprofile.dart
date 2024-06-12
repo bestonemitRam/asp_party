@@ -4,7 +4,7 @@ import 'package:aps_party/layers/presentation/view/tabsec.dart';
 import 'package:flutter/material.dart';
 
 
-import '../../domain/entity/model/profiledata.dart';
+import '../../domain/entity/profiledata.dart';
 import '../../data/utils/mytheme.dart';
 import 'hom.dart';
 

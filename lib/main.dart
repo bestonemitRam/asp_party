@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:aps_party/DefaultFirebaseOptions.dart';
+import 'package:aps_party/layers/presentation/DefaultFirebaseOptions.dart';
 import 'package:aps_party/layers/presentation/view/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -17,18 +17,20 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  await Firebase.initializeApp(
+    name: 'asp_party',
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   allInitialize();
 
   runApp(const MyApp());
 }
 
-Future<void> allInitialize() async {
-  await Firebase.initializeApp();
-
-  await Firebase.initializeApp(
-    name: 'shortnews',
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+Future<void> allInitialize() async
+ {
   _firebaseMessaging.subscribeToTopic('shotnews');
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);

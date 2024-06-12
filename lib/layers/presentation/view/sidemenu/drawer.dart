@@ -56,7 +56,9 @@ class MenuBarScreen extends StatelessWidget {
                           child: DrawerItem(
                             icon: Icons.home,
                             title: "home",
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                           ),
                         ),
                         Padding(

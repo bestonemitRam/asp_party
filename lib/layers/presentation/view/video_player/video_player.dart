@@ -1,9 +1,20 @@
-import 'package:aps_party/layers/domain/entity/model/profiledata.dart';
+import 'package:aps_party/layers/data/utils/app_color.dart';
+import 'package:aps_party/layers/domain/controller/home_controller.dart';
+import 'package:aps_party/layers/domain/entity/banner_member.dart';
+import 'package:aps_party/layers/domain/entity/party_agenda.dart';
+import 'package:aps_party/layers/domain/entity/profiledata.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/agenda.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/member_description.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/treanding%20_photos.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/instance_manager.dart';
+import 'package:marquee/marquee.dart';
+import 'package:marquee_list/marquee_list.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -13,10 +24,12 @@ class DraggableWidget extends StatefulWidget {
 }
 
 class _DraggableWidgetState extends State<DraggableWidget> {
+  final MyController myController = Get.put(MyController());
   double xPosition = 0;
   double yPosition = 0;
   int currentVideoIndex = 0;
   var isOpenPlayer = false;
+  bool _useRtlText = false;
 
   void clickTogglebutton() {
     switchToNextVideo();
@@ -25,6 +38,15 @@ class _DraggableWidgetState extends State<DraggableWidget> {
       isOpenPlayer = !isOpenPlayer;
     });
   }
+
+  var breakingNews = [
+    "नगीना लोकसभा से प्रत्यासी चंद्रशेखर आज़ाद रावण ने अपना ब्यौरा प्रस्तुत किया",
+    " : नगीना लोकसभा क्षेत्र में डोर टू डोर जनसंपर्क कर जनता से आशीर्वाद",
+    " - २०२४ लोकसभा चुनाव",
+    " : दलितों के 'रावण' की ये है कहानी, जेल से बाहर आते ही सरकार से ले लिया मोर्चा",
+    " : भीम आर्मी के आजाद का नाम ‘TIME 100 नेक्स्ट’ लिस्ट में",
+    " : Bhim Army chief Chandra Shekhar Aazad, 5 Indian-origin persons, feature in TIME magazine's list of 100 emerging leaders"
+  ];
 
   bool _showProgressIndicator = true;
 
@@ -100,33 +122,60 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                       width: 15.h,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: UsersData.users.length,
+                        itemCount: BannerMemberData.member.length,
                         itemBuilder: (context, index) {
-                          return TreandingPhotos(
-                            userStory: UsersData.users[index],
+                          return InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  elevation: 0,
+                                  context: context,
+                                  useRootNavigator: true,
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20))),
+                                  builder: (context) {
+                                    return Padding(
+                                      padding:
+                                          MediaQuery.of(context).viewInsets,
+                                      child: MemberDescription(
+                                        userStory:
+                                            BannerMemberData.member[index],
+                                      ),
+                                    );
+                                  });
+                            },
+                            child: TreandingPhotos(
+                              userStory: BannerMemberData.member[index],
+                            ),
                           );
                         },
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 16.h,
+                    top: 11.h,
                     left: 0,
                     right: 0,
                     child: CarouselSlider(
                       options: CarouselOptions(
                         height: 30.h,
                         aspectRatio: 16 / 9,
-                        viewportFraction: 0.8,
+                        //  viewportFraction: 0.8,
                         initialPage: 0,
-                        enableInfiniteScroll: true,
+                        // enableInfiniteScroll: true,
+
+                        disableCenter: true,
+                        viewportFraction: 1.0,
                         reverse: false,
                         autoPlay: true,
                         autoPlayInterval: Duration(seconds: 3),
                         autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        autoPlayCurve: Curves.fastOutSlowIn,
+                        //  autoPlayCurve: Curves.fastOutSlowIn,
                         enlargeCenterPage: true,
-                        enlargeFactor: 0.3,
+                        //  enlargeFactor: 0.3,
+
                         scrollDirection: Axis.horizontal,
                       ),
                       items: UsersData.users
@@ -136,8 +185,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                                 Container(
                                   height: 25.h,
                                   width: MediaQuery.of(context).size.width,
-                                  margin:
-                                      EdgeInsets.only(left: 10.0, right: 10),
+                                  margin: EdgeInsets.only(left: 1.0, right: 1),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
                                       color: Colors.white,
@@ -152,7 +200,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                     ),
                   ),
                   Positioned(
-                    top: 58.h,
+                    top: 60.h,
                     left: 0,
                     right: 0,
                     // bottom: 1.h,
@@ -185,22 +233,64 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                     ),
                   ),
                   Positioned(
-                    top: 42.h,
+                    top: 38.h,
                     left: 0,
                     right: 0,
-                    child: SizedBox(
-                      height: 15.h,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: UsersData.users.length,
-                        itemBuilder: (context, index) {
-                          return TreandingPhotos(
-                            userStory: UsersData.users[index],
-                          );
-                        },
-                      ),
-                    ),
+                    child: Container(
+                        height: 10.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(10)),
+                          color: AppColors.primarycolorYellow.withOpacity(0.6),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Text(
+                                "ANNOUNCEMENTS",
+                                style: TextStyle(fontSize: 18.sp),
+                              ),
+                            ),
+                            MarqueeList(
+                              scrollDirection: Axis.horizontal,
+                              scrollDuration: const Duration(seconds: 3),
+                              children: [
+                                for (int i = 0; i < breakingNews.length; i++)
+                                  Text(
+                                    breakingNews[i],
+                                    style: TextStyle(fontSize: 18.sp),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        )),
                   ),
+                  Obx(
+                    () => myController.myData.isNotEmpty
+                        ? Positioned(
+                            top: 50.h,
+                            left: 0,
+                            right: 0,
+                            child: SizedBox(
+                              height: 50.h,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: myController.myData.value.length,
+                                itemBuilder: (context, index) {
+                                  print("klfjghkjjkfg");
+                                  var item = myController.myData[index];
+                                  return PartyAgenda(
+                                    myData: myController.myData[index],
+                                  );
+                                },
+                              ),
+                            ),
+                          )
+                        : Center(),
+                  )
                 ],
               ),
             ),

@@ -6,7 +6,8 @@ class UserProfile {
 }
 
 class UsersData {
-  static final List users = [
+  static final List users =
+   [
     UserProfile('Muhammad', 'assets/images/1.png'),
     UserProfile('Joseph', 'assets/images/5.png'),
     UserProfile('Zain', 'assets/images/2.png'),
