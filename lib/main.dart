@@ -5,6 +5,7 @@ import 'package:aps_party/layers/presentation/view/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -20,6 +21,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    print("Error loading .env file: $e");
+  }
+
   await Firebase.initializeApp(
     name: 'asp_party',
     options: DefaultFirebaseOptions.currentPlatform,
@@ -29,8 +36,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-Future<void> allInitialize() async
- {
+Future<void> allInitialize() async {
   _firebaseMessaging.subscribeToTopic('shotnews');
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -49,14 +55,13 @@ Future<void> allInitialize() async
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Instagram',
-        theme: ThemeData.dark(),
+        // theme: ThemeData.dark(),
         home: HomePage(),
       );
     });

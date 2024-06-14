@@ -3,9 +3,12 @@ import 'package:aps_party/layers/domain/controller/home_controller.dart';
 import 'package:aps_party/layers/domain/entity/banner_member.dart';
 import 'package:aps_party/layers/domain/entity/party_agenda.dart';
 import 'package:aps_party/layers/domain/entity/profiledata.dart';
+import 'package:aps_party/layers/domain/entity/video_model.dart';
+import 'package:aps_party/layers/presentation/view/hom.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/agenda.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/member_description.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/treanding%20_photos.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/videos.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +34,8 @@ class _DraggableWidgetState extends State<DraggableWidget> {
   var isOpenPlayer = false;
   bool _useRtlText = false;
 
-  void clickTogglebutton() {
-    switchToNextVideo();
+  void clickTogglebutton(video_url) {
+    switchToNextVideo(video_url);
     print("lfkjhkfjhgkl");
     setState(() {
       isOpenPlayer = !isOpenPlayer;
@@ -52,11 +55,9 @@ class _DraggableWidgetState extends State<DraggableWidget> {
 
   late YoutubePlayerController _controller;
 
-  void switchToNextVideo() {
+  void switchToNextVideo(video_url) {
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(
-              'https://www.youtube.com/watch?v=umhl2hakkcY&t=23s')
-          .toString(),
+      initialVideoId: YoutubePlayer.convertUrlToId(video_url).toString(),
       flags: YoutubePlayerFlags(
           autoPlay: true,
           mute: false,
@@ -83,9 +84,9 @@ class _DraggableWidgetState extends State<DraggableWidget> {
     return Scaffold(
         drawer: MenuBarScreen(),
         //drawerScrimColor: Colors.white,
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.whiteColor,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          // backgroundColor: Colors.black,
           title: Text(
             "ASP  ",
             style: TextStyle(
@@ -109,6 +110,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
         ),
         body: Stack(children: [
           SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: SizedBox(
               height: 2000,
               child: Stack(
@@ -199,50 +201,53 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                           .toList(),
                     ),
                   ),
+                  Obx(() => myController.videoList.isNotEmpty
+                      ? Positioned(
+                          top: 67.5.h,
+                          left: 0,
+                          right: 0,
+                          // bottom: 1.h,
+                          child: SizedBox(
+                            height: 1000.h,
+                            child: GridView.count(
+                                // scrollDirection: Axis.horizontal,
+                                // itemCount: myController.videoList.value.length,
+
+                                shrinkWrap: true,
+                                primary: false,
+                                physics: NeverScrollableScrollPhysics(),
+                                padding: const EdgeInsets.only(
+                                    left: 0, right: 0, top: 0),
+                                // crossAxisSpacing: 1.5,
+                                // mainAxisSpacing: 18,
+                                crossAxisCount: 2,
+                                children: List.generate(
+                                    myController.videoList.value.length,
+                                    (index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      clickTogglebutton(myController
+                                          .videoList.value[index].video_url);
+                                    },
+                                    child: ShowItemValue(
+                                        video: myController
+                                            .videoList.value[index]),
+                                  );
+                                })),
+                          ))
+                      : Center()),
                   Positioned(
-                    top: 60.h,
-                    left: 0,
-                    right: 0,
-                    // bottom: 1.h,
-                    child: SizedBox(
-                      height: 10000,
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: UsersData.users.length,
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                            height: 15.h,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: UsersData.users.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    clickTogglebutton();
-                                  },
-                                  child: ShowItemValue(
-                                    userStory: UsersData.users[index],
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 38.h,
+                    top: 37.h,
                     left: 0,
                     right: 0,
                     child: Container(
-                        height: 10.h,
+                        height: 11.h,
+                        margin: const EdgeInsets.only(left: 5, right: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(10),
                               bottomLeft: Radius.circular(10)),
-                          color: AppColors.primarycolorYellow.withOpacity(0.6),
+                          color: AppColors.primarycolor.withOpacity(0.6),
                         ),
                         child: Column(
                           children: [
@@ -251,7 +256,8 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                                   horizontal: 10, vertical: 10),
                               child: Text(
                                 "ANNOUNCEMENTS",
-                                style: TextStyle(fontSize: 18.sp),
+                                style: TextStyle(
+                                    fontSize: 18.sp, color: Colors.white),
                               ),
                             ),
                             MarqueeList(
@@ -261,7 +267,8 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                                 for (int i = 0; i < breakingNews.length; i++)
                                   Text(
                                     breakingNews[i],
-                                    style: TextStyle(fontSize: 18.sp),
+                                    style: TextStyle(
+                                        fontSize: 18.sp, color: Colors.white),
                                   ),
                               ],
                             ),
@@ -271,16 +278,15 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                   Obx(
                     () => myController.myData.isNotEmpty
                         ? Positioned(
-                            top: 50.h,
+                            top: 49.h,
                             left: 0,
                             right: 0,
                             child: SizedBox(
-                              height: 50.h,
+                              height: 20.h,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: myController.myData.value.length,
                                 itemBuilder: (context, index) {
-                                  print("klfjghkjjkfg");
                                   var item = myController.myData[index];
                                   return PartyAgenda(
                                     myData: myController.myData[index],
@@ -349,7 +355,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                             children: [
                               IconButton(
                                   onPressed: () {
-                                    clickTogglebutton();
+                                    clickTogglebutton('');
                                   },
                                   icon: Icon(
                                     Icons.clear,
@@ -375,48 +381,5 @@ class _DraggableWidgetState extends State<DraggableWidget> {
               ),
             ),
         ]));
-  }
-}
-
-class ShowItemValue extends StatelessWidget {
-  final UserProfile userStory;
-  const ShowItemValue({super.key, required this.userStory});
-  String getThumbnailUrl(String videoUrl) {
-    final uri = Uri.parse(videoUrl);
-    final videoId = uri.queryParameters['v'] ?? uri.pathSegments.last;
-    return 'https://img.youtube.com/vi/$videoId/hqdefault.jpg';
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: .3, vertical: 10),
-          child: Container(
-            height: 19.h,
-            width: MediaQuery.of(context).size.width / 2,
-            margin: EdgeInsets.only(left: 10.0, right: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white,
-                image: DecorationImage(
-                    //  image: AssetImage(userStory.url),
-                    image: NetworkImage(getThumbnailUrl(
-                        'https://www.youtube.com/watch?v=umhl2hakkcY&t=23s')),
-                    fit: BoxFit.cover)),
-          ),
-        ),
-        Positioned(
-          left: 12.h,
-          top: 3.5.h,
-          child: Container(
-            width: 52.62,
-            height: 52.62,
-            child: SvgPicture.asset("assets/images/play.svg"),
-          ),
-        ),
-      ],
-    );
   }
 }

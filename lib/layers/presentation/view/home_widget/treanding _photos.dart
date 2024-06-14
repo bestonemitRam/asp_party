@@ -17,13 +17,7 @@ class TreandingPhotos extends StatelessWidget {
             backgroundImage: AssetImage(userStory.url),
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 04, vertical: 10),
-        //   child: Text(
-        //     userStory.name,
-        //     style: TextStyle(fontSize: 16),
-        //   ),
-        // )
+       
       ],
     );
   }

@@ -1,5 +1,6 @@
 class AppImages {
   static String rootimg = "assets/member/";
+  static String chandra = "assets/images/4.png";
   static String dr = rootimg + "dr.jpg";
   static String kansi = rootimg + "kansi.jpg";
   static String apj = rootimg + "apj.jpg";
@@ -24,7 +25,7 @@ class AppImages {
   static String shivaji = rootimg + "shivaji.jpg";
   static String gadgeji = rootimg + "gadgeji.png";
   static String savitribaiphule = rootimg + "savitribaiphule.jpg";
+  static String Bhim_Army_Bharat_Ekta_Mission_logo = rootimg + "Bhim_Army_Bharat_Ekta_Mission_logo.jpg";
 
-
-
+  
 }

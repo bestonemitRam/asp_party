@@ -1,5 +1,12 @@
+import 'package:aps_party/layers/data/utils/app_images.dart';
+import 'package:aps_party/layers/presentation/view/all_video.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/DrawerItemui.dart';
+import 'package:aps_party/layers/presentation/view/sidemenu/about_party.dart';
+import 'package:aps_party/layers/presentation/view/sidemenu/party_Organizations.dart';
+import 'package:aps_party/layers/presentation/view/sidemenu/party_description.dart';
+import 'package:aps_party/layers/presentation/view/sidemenu/party_foundations.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class MenuBarScreen extends StatelessWidget {
   const MenuBarScreen({Key? key}) : super(key: key);
@@ -27,13 +34,10 @@ class MenuBarScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: CircleAvatar(
                         radius: 40,
-                        backgroundImage: AssetImage('assets/images/chat.png'),
+                        backgroundImage: AssetImage(AppImages.dr),
                       ),
 
-                      //  Image.asset(
-                      //   AppImages.logo,
-                      //   fit: BoxFit.fill,
-                      // ),
+                     
                     ),
                   ),
                   SizedBox(
@@ -73,7 +77,18 @@ class MenuBarScreen extends StatelessWidget {
                           child: DrawerItem(
                               icon: Icons.search,
                               title: "The Party",
-                              onTap: () {}),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    duration: Duration(milliseconds: 700),
+                                    child: Party(),
+                                  ),
+                                );
+
+                                //  PartyDescription
+                              }),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 40),
@@ -86,8 +101,17 @@ class MenuBarScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: DrawerItem(
                               icon: Icons.search,
-                              title: "Leadership",
-                              onTap: () {}),
+                              title: "Party Organization",
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    duration: Duration(milliseconds: 700),
+                                    child: PartyOrganization(),
+                                  ),
+                                );
+                              }),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 40),
@@ -100,8 +124,17 @@ class MenuBarScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: DrawerItem(
                               icon: Icons.search,
-                              title: "Morcha",
-                              onTap: () {}),
+                              title: "Bharat Ekta Mission",
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    duration: Duration(milliseconds: 700),
+                                    child: PartyFoundations(),
+                                  ),
+                                );
+                              }),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 40),
@@ -115,7 +148,16 @@ class MenuBarScreen extends StatelessWidget {
                           child: DrawerItem(
                               icon: Icons.search,
                               title: "Media Resources",
-                              onTap: () {}),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    duration: Duration(milliseconds: 700),
+                                    child: AllVideo(),
+                                  ),
+                                );
+                              }),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 40),

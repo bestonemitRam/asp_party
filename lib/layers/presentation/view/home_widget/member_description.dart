@@ -79,15 +79,15 @@ class _MyWidgetState extends State<MemberDescription> {
                                 borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(10),
                                     bottomLeft: Radius.circular(10)),
-                                color: AppColors.primarycolorYellow
-                                    .withOpacity(0.6),
+                                color: AppColors.primarycolor.withOpacity(0.6),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 10),
                                 child: Text(
                                   widget.userStory.name,
-                                  style: TextStyle(fontSize: 16),
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white),
                                 ),
                               ),
                             )),

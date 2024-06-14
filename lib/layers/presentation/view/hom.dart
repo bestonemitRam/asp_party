@@ -143,9 +143,9 @@ class Home extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {},
-                              child: ShowItemValue(
-                                userStory: UsersData.users[index],
-                              ),
+                              // child: ShowItemValue(
+                              //   userStory: UsersData.users[index],
+                              // ),
                             );
                           },
                         ),
@@ -189,170 +189,170 @@ class ShowItem extends StatelessWidget {
   }
 }
 
-class ShowItemValue extends StatelessWidget {
-  final UserProfile userStory;
-  const ShowItemValue({super.key, required this.userStory});
+// class ShowItemValue extends StatelessWidget {
+//   final UserProfile userStory;
+//   const ShowItemValue({super.key, required this.userStory});
 
-  // Widget testimon(TestimonialVideo testimonials) {
+//   // Widget testimon(TestimonialVideo testimonials) {
 
-  //   return Container(
-  //     width: 195,
-  //     height: 121.18,
-  //     child:
-  //     Stack(
-  //       children: [
-  //         Positioned(
-  //           left: 0,
-  //           top: 0,
-  //           child: Container(
-  //             width: 195,
-  //             height: 121,
-  //             child: Stack(
-  //               children: [
-  //                 Positioned(
-  //                     left: 0,
-  //                     top: 0,
-  //                     child: Container(
-  //                       width: 195,
-  //                       height: 121,
-  //                       //  width: MediaQuery.of(context).size.width,
-  //                       margin: EdgeInsets.only(left: 0.0.w, right: 0.w),
-  //                       decoration: ShapeDecoration(
-  //                           color: const Color(0xFFD9D9D9),
-  //                           shape: RoundedRectangleBorder(
-  //                               borderRadius: BorderRadius.circular(10)),
-  //                           image: testimonials.status != null
-  //                               ? DecorationImage(
-  //                                   image: NetworkImage(testimonials
-  //                                       .thumbnail_image
-  //                                       .toString()),
-  //                                   fit: BoxFit.cover)
-  //                               : DecorationImage(
-  //                                   image: AssetImage(
-  //                                       'assets/images/clients.jpeg'))),
-  //                     ))
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //         Positioned(
-  //           left: 0,
-  //           top: 0,
-  //           child: Container(
-  //             width: 194.52,
-  //             height: 121.18,
-  //             decoration: ShapeDecoration(
-  //               gradient: LinearGradient(
-  //                 begin: const Alignment(-0.00, -1.00),
-  //                 end: const Alignment(0, 1),
-  //                 colors: [Colors.black.withOpacity(0), Colors.black],
-  //               ),
-  //               shape: RoundedRectangleBorder(
-  //                   borderRadius: BorderRadius.circular(9)),
-  //               shadows: [
-  //                 BoxShadow(
-  //                   color: Color(0x3F000000),
-  //                   blurRadius: 4,
-  //                   offset: Offset(0, 4),
-  //                   spreadRadius: 0,
-  //                 )
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //         Positioned(
-  //           left: 9.57,
-  //           top: 88.49,
-  //           child: Container(
-  //             width: 165.02,
-  //             height: 27.11,
-  //             child: Stack(
-  //               children: [
-  //                 Positioned(
-  //                   left: -0,
-  //                   top: 12.76,
-  //                   child: SizedBox(
-  //                     // width: 165.02,
-  //                     height: 14.35,
-  //                     child: Text(
-  //                       testimonials.title.toString(),
-  //                       style: TextStyle(
-  //                         color: Colors.white,
-  //                         fontSize: 8,
-  //                         fontFamily: 'Segoe UI',
-  //                         fontWeight: FontWeight.w600,
-  //                         height: 0,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 Positioned(
-  //                   left: 0,
-  //                   top: 0,
-  //                   child: SizedBox(
-  //                     width: 22.74,
-  //                     height: 14.76,
-  //                     child: Text(
-  //                       '',
-  //                       style: TextStyle(
-  //                         color: Colors.white,
-  //                         fontSize: 9,
-  //                         fontFamily: 'Segoe UI',
-  //                         fontWeight: FontWeight.w600,
-  //                         height: 0,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //         Positioned(
-  //           left: 70.95,
-  //           top: 34.28,
-  //           child: Container(
-  //             width: 52.62,
-  //             height: 52.62,
-  //             child: SvgPicture.asset("assets/images/play.svg"),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
+//   //   return Container(
+//   //     width: 195,
+//   //     height: 121.18,
+//   //     child:
+//   //     Stack(
+//   //       children: [
+//   //         Positioned(
+//   //           left: 0,
+//   //           top: 0,
+//   //           child: Container(
+//   //             width: 195,
+//   //             height: 121,
+//   //             child: Stack(
+//   //               children: [
+//   //                 Positioned(
+//   //                     left: 0,
+//   //                     top: 0,
+//   //                     child: Container(
+//   //                       width: 195,
+//   //                       height: 121,
+//   //                       //  width: MediaQuery.of(context).size.width,
+//   //                       margin: EdgeInsets.only(left: 0.0.w, right: 0.w),
+//   //                       decoration: ShapeDecoration(
+//   //                           color: const Color(0xFFD9D9D9),
+//   //                           shape: RoundedRectangleBorder(
+//   //                               borderRadius: BorderRadius.circular(10)),
+//   //                           image: testimonials.status != null
+//   //                               ? DecorationImage(
+//   //                                   image: NetworkImage(testimonials
+//   //                                       .thumbnail_image
+//   //                                       .toString()),
+//   //                                   fit: BoxFit.cover)
+//   //                               : DecorationImage(
+//   //                                   image: AssetImage(
+//   //                                       'assets/images/clients.jpeg'))),
+//   //                     ))
+//   //               ],
+//   //             ),
+//   //           ),
+//   //         ),
+//   //         Positioned(
+//   //           left: 0,
+//   //           top: 0,
+//   //           child: Container(
+//   //             width: 194.52,
+//   //             height: 121.18,
+//   //             decoration: ShapeDecoration(
+//   //               gradient: LinearGradient(
+//   //                 begin: const Alignment(-0.00, -1.00),
+//   //                 end: const Alignment(0, 1),
+//   //                 colors: [Colors.black.withOpacity(0), Colors.black],
+//   //               ),
+//   //               shape: RoundedRectangleBorder(
+//   //                   borderRadius: BorderRadius.circular(9)),
+//   //               shadows: [
+//   //                 BoxShadow(
+//   //                   color: Color(0x3F000000),
+//   //                   blurRadius: 4,
+//   //                   offset: Offset(0, 4),
+//   //                   spreadRadius: 0,
+//   //                 )
+//   //               ],
+//   //             ),
+//   //           ),
+//   //         ),
+//   //         Positioned(
+//   //           left: 9.57,
+//   //           top: 88.49,
+//   //           child: Container(
+//   //             width: 165.02,
+//   //             height: 27.11,
+//   //             child: Stack(
+//   //               children: [
+//   //                 Positioned(
+//   //                   left: -0,
+//   //                   top: 12.76,
+//   //                   child: SizedBox(
+//   //                     // width: 165.02,
+//   //                     height: 14.35,
+//   //                     child: Text(
+//   //                       testimonials.title.toString(),
+//   //                       style: TextStyle(
+//   //                         color: Colors.white,
+//   //                         fontSize: 8,
+//   //                         fontFamily: 'Segoe UI',
+//   //                         fontWeight: FontWeight.w600,
+//   //                         height: 0,
+//   //                       ),
+//   //                     ),
+//   //                   ),
+//   //                 ),
+//   //                 Positioned(
+//   //                   left: 0,
+//   //                   top: 0,
+//   //                   child: SizedBox(
+//   //                     width: 22.74,
+//   //                     height: 14.76,
+//   //                     child: Text(
+//   //                       '',
+//   //                       style: TextStyle(
+//   //                         color: Colors.white,
+//   //                         fontSize: 9,
+//   //                         fontFamily: 'Segoe UI',
+//   //                         fontWeight: FontWeight.w600,
+//   //                         height: 0,
+//   //                       ),
+//   //                     ),
+//   //                   ),
+//   //                 ),
+//   //               ],
+//   //             ),
+//   //           ),
+//   //         ),
+//   //         Positioned(
+//   //           left: 70.95,
+//   //           top: 34.28,
+//   //           child: Container(
+//   //             width: 52.62,
+//   //             height: 52.62,
+//   //             child: SvgPicture.asset("assets/images/play.svg"),
+//   //           ),
+//   //         ),
+//   //       ],
+//   //     ),
 
-  //   );
-  // }
+//   //   );
+//   // }
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 04, vertical: 10),
-          child: Container(
-            height: 90,
-            width: MediaQuery.of(context).size.width / 2,
-            margin: EdgeInsets.only(left: 10.0, right: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white,
-                image: DecorationImage(
-                    image: AssetImage(userStory.url), fit: BoxFit.fill)),
-          ),
-        ),
-        Positioned(
-          left: 10.h,
-          top: 3.5.h,
-          child: Container(
-            width: 52.62,
-            height: 52.62,
-            child: SvgPicture.asset("assets/images/play.svg"),
-          ),
-        ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       children: [
+//         Padding(
+//           padding: const EdgeInsets.symmetric(horizontal: 04, vertical: 10),
+//           child: Container(
+//             height: 90,
+//             width: MediaQuery.of(context).size.width / 2,
+//             margin: EdgeInsets.only(left: 10.0, right: 10),
+//             decoration: BoxDecoration(
+//                 borderRadius: BorderRadius.circular(8),
+//                 color: Colors.white,
+//                 image: DecorationImage(
+//                     image: AssetImage(userStory.url), fit: BoxFit.fill)),
+//           ),
+//         ),
+//         Positioned(
+//           left: 10.h,
+//           top: 3.5.h,
+//           child: Container(
+//             width: 52.62,
+//             height: 52.62,
+//             child: SvgPicture.asset("assets/images/play.svg"),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 class ShowPosts extends StatefulWidget {
   final UserProfile userPost;

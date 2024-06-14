@@ -3,7 +3,7 @@
 import 'package:aps_party/layers/presentation/view/addpage.dart';
 import 'package:aps_party/layers/presentation/view/hom.dart';
 import 'package:aps_party/layers/presentation/view/reels.dart';
-import 'package:aps_party/layers/presentation/view/seacrh.dart';
+import 'package:aps_party/layers/presentation/view/all_video.dart';
 import 'package:aps_party/layers/presentation/view/userprofile.dart';
 import 'package:aps_party/layers/presentation/view/video_player/video_player.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> pages = [
     DraggableWidget(),
-    Search(),
+    AllVideo(),
     AddPage(),
     Reels(),
     UserProfile()
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 label: "home"),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.search,
+                  Icons.videocam_outlined,
                   color: iconcolor,
                 ),
                 label: "Search"),

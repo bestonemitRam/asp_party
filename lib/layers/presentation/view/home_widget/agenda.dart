@@ -1,7 +1,10 @@
 import 'package:aps_party/layers/domain/entity/banner_member.dart';
 import 'package:aps_party/layers/domain/entity/party_agenda.dart';
 import 'package:aps_party/layers/domain/entity/profiledata.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PartyAgenda extends StatelessWidget {
   final PartyAgendaModel myData;
@@ -11,21 +14,30 @@ class PartyAgenda extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 02, vertical: 10),
-          child: CircleAvatar(
-            radius: 40,
-            backgroundImage: NetworkImage(myData.img),
+  
+        Container(
+          height: 18.h,
+          width: MediaQuery.of(context).size.width / 1.5,
+          margin: EdgeInsets.only(left: 10.0, right: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.white,
+      
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: CachedNetworkImage(
+              fit: BoxFit.fill,
+              imageUrl: myData.img.toString(),
+              // height: 200,
+              width: double.infinity,
+              placeholder: (context, url) =>
+                  Center(child: const CircularProgressIndicator()),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
           ),
         ),
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 04, vertical: 10),
-        //   child: Text(
-        //     userStory.name,
-        //     style: TextStyle(fontSize: 16),
-        //   ),
-        // )
-      ],
+         ],
     );
   }
 }

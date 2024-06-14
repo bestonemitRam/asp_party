@@ -1,4 +1,4 @@
-import 'package:aps_party/layers/presentation/view/seacrh.dart';
+import 'package:aps_party/layers/presentation/view/all_video.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entity/profiledata.dart';
