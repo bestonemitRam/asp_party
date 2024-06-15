@@ -29,21 +29,22 @@ class _AllVideoState extends State<AllVideo> {
                   padding: EdgeInsets.only(top: 5.h),
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: seachkController,
-                          onChanged: (value) {
-                            setState(() {});
-                            // leadsController.getSeachleadModel(
-                            //     seachkController.text);
-                          },
-                          decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.search),
-                              hintText: "Search",
-                              hintStyle: TextStyle(color: Colors.black),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10))),
+                      SizedBox(
+                        height: 8.h,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            controller: seachkController,
+                            onChanged: (value) {
+                              setState(() {});
+                            },
+                            decoration: InputDecoration(
+                                prefixIcon: const Icon(Icons.search),
+                                hintText: "Search",
+                                hintStyle: TextStyle(color: Colors.black),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -88,20 +89,8 @@ class _AllVideoState extends State<AllVideo> {
                 ),
               )
             : Center()));
+ 
+
   }
 }
 
-class ShowGrid extends StatelessWidget {
-  final UserProfile usergrid;
-
-  const ShowGrid({super.key, required this.usergrid});
-  @override
-  Widget build(BuildContext context) {
-    return Image(
-      fit: BoxFit.cover,
-      height: 200,
-      width: 200,
-      image: AssetImage(usergrid.url),
-    );
-  }
-}

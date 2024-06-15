@@ -5,6 +5,7 @@ import 'package:aps_party/layers/presentation/view/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -32,8 +33,14 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   allInitialize();
+   SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(const MyApp());
+  });
 
-  runApp(const MyApp());
+ 
 }
 
 Future<void> allInitialize() async {

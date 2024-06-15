@@ -14,9 +14,7 @@ class TabSec extends StatelessWidget {
               crossAxisCount: 3, mainAxisSpacing: 1, crossAxisSpacing: 1),
           itemCount: UsersData.users.length,
           itemBuilder: (context, index) {
-            return ShowGrid(
-              usergrid: UsersData.users[index],
-            );
+            return Container();
           }),
     );
   }

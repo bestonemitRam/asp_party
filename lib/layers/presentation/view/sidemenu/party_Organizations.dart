@@ -84,6 +84,28 @@ class _MyWidgetState extends State<PartyOrganization> {
                                   ),
                                 )),
                               ),
+                              Positioned(
+                                top: 4.h,
+                                left: 1.h,
+                                // right: 0,
+                                // bottom: 2.h,
+                                child: SizedBox(
+                                    child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10)),
+                                    color:
+                                        const Color.fromARGB(255, 181, 181, 189)
+                                            .withOpacity(0.6),
+                                  ),
+                                  child: InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Icon(Icons.arrow_back)),
+                                )),
+                              ),
                             ],
                           ),
                           Padding(

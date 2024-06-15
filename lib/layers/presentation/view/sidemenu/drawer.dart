@@ -1,6 +1,7 @@
 import 'package:aps_party/layers/data/utils/app_images.dart';
 import 'package:aps_party/layers/presentation/view/all_video.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/DrawerItemui.dart';
+import 'package:aps_party/layers/presentation/view/sidemenu/about_app.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/about_party.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_Organizations.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_description.dart';
@@ -36,8 +37,6 @@ class MenuBarScreen extends StatelessWidget {
                         radius: 40,
                         backgroundImage: AssetImage(AppImages.dr),
                       ),
-
-                     
                     ),
                   ),
                   SizedBox(
@@ -213,7 +212,16 @@ class MenuBarScreen extends StatelessWidget {
                           child: DrawerItem(
                               icon: Icons.search,
                               title: "About App",
-                              onTap: () {}),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    duration: Duration(milliseconds: 700),
+                                    child: AboutApp(),
+                                  ),
+                                );
+                              }),
                         )
                       ],
                     ),

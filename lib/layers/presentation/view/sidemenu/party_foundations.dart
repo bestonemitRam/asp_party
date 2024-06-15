@@ -53,15 +53,16 @@ class _MyWidgetState extends State<PartyFoundations> {
                                       borderRadius: BorderRadius.circular(8),
                                       color: Colors.white,
                                       image: DecorationImage(
-                                          image: AssetImage(AppImages.Bhim_Army_Bharat_Ekta_Mission_logo),
+                                          image: AssetImage(AppImages
+                                              .Bhim_Army_Bharat_Ekta_Mission_logo),
                                           fit: BoxFit.fill)),
                                 ),
                               ),
                               Positioned(
-                                // top: 2.h,
+                                top: 4.h,
                                 left: 1.h,
                                 // right: 0,
-                                bottom: 2.h,
+                                // bottom: 2.h,
                                 child: SizedBox(
                                     child: Container(
                                   decoration: BoxDecoration(
@@ -69,19 +70,14 @@ class _MyWidgetState extends State<PartyFoundations> {
                                         topRight: Radius.circular(10),
                                         bottomLeft: Radius.circular(10)),
                                     color:
-                                        AppColors.primarycolor.withOpacity(0.6),
+                                        const Color.fromARGB(255, 181, 181, 189)
+                                            .withOpacity(0.6),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 10),
-                                    child: const Text(
-                                      "Party History",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white),
-                                    ),
-                                  ),
+                                  child: InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Icon(Icons.arrow_back)),
                                 )),
                               ),
                             ],
@@ -90,7 +86,7 @@ class _MyWidgetState extends State<PartyFoundations> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 0, vertical: 0),
                             child: Text(
-                                "भीम आर्मी - भारत एकता मिशन की स्थापना 2015 में पश्चिमी यूपी के सहारनपुर जिले में हुई थी। जाति से प्रेरित हमले, महत्वपूर्ण दलित शख्सियतों की मूर्तियों को अपवित्र किया गया, हिंदू दक्षिणपंथी ताकतों द्वारा दंगे और संपत्ति का विनाश सहारनपुर में बड़े पैमाने पर हुआ। भीम आर्मी ने खुद को दलित दावे के दबाव समूह के रूप में तैयार किया और यह स्पष्ट कर दिया कि दलितों पर दुर्व्यवहार और हिंसा अब बर्दाश्त नहीं की जाएगी, और दलितों के साथ सम्मान के साथ व्यवहार किया जाना चाहिए।",
+                              "भीम आर्मी - भारत एकता मिशन की स्थापना 2015 में पश्चिमी यूपी के सहारनपुर जिले में हुई थी। जाति से प्रेरित हमले, महत्वपूर्ण दलित शख्सियतों की मूर्तियों को अपवित्र किया गया, हिंदू दक्षिणपंथी ताकतों द्वारा दंगे और संपत्ति का विनाश सहारनपुर में बड़े पैमाने पर हुआ। भीम आर्मी ने खुद को दलित दावे के दबाव समूह के रूप में तैयार किया और यह स्पष्ट कर दिया कि दलितों पर दुर्व्यवहार और हिंसा अब बर्दाश्त नहीं की जाएगी, और दलितों के साथ सम्मान के साथ व्यवहार किया जाना चाहिए।",
                               style: TextStyle(fontSize: 16),
                             ),
                           ),

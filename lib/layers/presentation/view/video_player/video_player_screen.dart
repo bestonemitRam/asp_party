@@ -1,5 +1,6 @@
 import 'package:aps_party/layers/domain/entity/video_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -15,6 +16,7 @@ class VideoPlyerScreens extends StatefulWidget {
 class _VideoPlyerScreensState extends State<VideoPlyerScreens> {
   late YoutubePlayerController _controller;
   bool _showProgressIndicator = true;
+  bool _isFullScreen = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -41,42 +43,70 @@ class _VideoPlyerScreensState extends State<VideoPlyerScreens> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              child: YoutubePlayer(
-                controller: _controller,
-                showVideoProgressIndicator: true,
-                progressIndicatorColor: Colors.transparent,
-                onEnded: (metaData) {
-                  _controller.load(_controller.metadata.videoId);
-                  // switchToNextVideo();
-                },
-                onReady: () {
-                  // videoIds.add('');
-                  //switchToNextVideo();
-                },
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text("Video")),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(left: 8, right: 8),
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 2,
+                child: YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: true,
+                  progressIndicatorColor: Colors.transparent,
+                  onEnded: (metaData) {
+                    _controller.load(_controller.metadata.videoId);
+                    // switchToNextVideo();
+                  },
+                  onReady: () {},
+                ),
               ),
-            ),
-            // Positioned(
-            //     top: 1,
-            //     left: 10,
-            //     child: InkWell(
-            //         onTap: () {
-            //           Navigator.pop(context);
-            //         },
-            //         child: Icon(
-            //           Icons.clear,
-            //           weight: Device.width,
-            //           size: 40,
-            //           color: Colors.white,
-            //         )))
-          ],
+              // Positioned(
+              //     top: 1,
+              //     left: 10,
+              //     child: InkWell(
+              //         onTap: () {
+              //           Navigator.pop(context);
+              //         },
+              //         child: Icon(
+              //           Icons.clear,
+              //           weight: Device.width,
+              //           size: 40,
+              //           color: Colors.white,
+              //         )))
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                child: Text(
+                  widget.video.title,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                child: Text(
+                  widget.video.description,
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

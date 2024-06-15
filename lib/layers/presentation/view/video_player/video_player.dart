@@ -240,7 +240,8 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                     top: 37.h,
                     left: 0,
                     right: 0,
-                    child: Container(
+                    child:
+                     Container(
                         height: 11.h,
                         margin: const EdgeInsets.only(left: 5, right: 5),
                         decoration: BoxDecoration(
@@ -274,6 +275,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                             ),
                           ],
                         )),
+                 
                   ),
                   Obx(
                     () => myController.myData.isNotEmpty
