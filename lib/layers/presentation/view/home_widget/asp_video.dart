@@ -1,28 +1,26 @@
 import 'package:aps_party/layers/domain/controller/home_controller.dart';
-import 'package:aps_party/layers/domain/controller/video_controller.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/video_widget.dart';
 import 'package:aps_party/layers/presentation/view/video_player/video_player_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class CongresVideo extends StatefulWidget {
-  const CongresVideo({super.key});
+class ASPVideo extends StatefulWidget {
+  const ASPVideo({super.key});
 
   @override
-  State<CongresVideo> createState() => _MyWidgetState();
+  State<ASPVideo> createState() => _BJPVideoState();
 }
 
-class _MyWidgetState extends State<CongresVideo> {
-  final VideoController myController = Get.put(VideoController());
+class _BJPVideoState extends State<ASPVideo> {
+  final MyController myController = Get.put(MyController());
 
   final seachkController = TextEditingController();
   @override
-  Widget build(BuildContext context) 
-  {
-    myController.fetchData('congressvideo');
-   return Obx(() => myController.videoList.isNotEmpty
+  Widget build(BuildContext context) {
+    return Obx(() => myController.videoList.isNotEmpty
         ? SizedBox(
             child: ListView.builder(
                 itemCount: myController.videoList.value.length,

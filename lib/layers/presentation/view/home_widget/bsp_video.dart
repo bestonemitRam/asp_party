@@ -1,4 +1,5 @@
 import 'package:aps_party/layers/domain/controller/home_controller.dart';
+import 'package:aps_party/layers/domain/controller/video_controller.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/video_widget.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/videos.dart';
 import 'package:aps_party/layers/presentation/view/video_player/video_player_screen.dart';
@@ -17,39 +18,35 @@ class BSPVideo extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<BSPVideo> {
-  final MyController myController = Get.put(MyController());
+  final VideoController myController = Get.put(VideoController());
 
-  final seachkController = TextEditingController();
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
+     myController.fetchData('bspvideo');
     return Obx(() => myController.videoList.isNotEmpty
         ? SizedBox(
-            child: GridView.count(
-                shrinkWrap: true,
-                primary: false,
-                crossAxisCount: 1,
-                children:
-                    List.generate(myController.videoList.value.length, (index) {
-                  return myController.videoList.value[index].title!
-                          .toLowerCase()
-                          .contains(seachkController.text)
-                      ? InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                duration: Duration(milliseconds: 700),
-                                child: VideoPlyerScreens(
-                                    video: myController.videoList.value[index]),
-                              ),
-                            );
-                          },
-                          child: VideoWidget(
+            child: ListView.builder(
+                itemCount: myController.videoList.value.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          duration: Duration(milliseconds: 700),
+                          child: VideoPlyerScreens(
                               video: myController.videoList.value[index]),
-                        )
-                      : Center();
-                })),
+                        ),
+                      );
+                    },
+                    child:
+                        VideoWidget(video: myController.videoList.value[index]),
+                  );
+                }),
+           
           )
         : Center());
   }

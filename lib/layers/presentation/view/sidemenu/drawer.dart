@@ -3,6 +3,7 @@ import 'package:aps_party/layers/presentation/view/all_video.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/DrawerItemui.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/about_app.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/about_party.dart';
+import 'package:aps_party/layers/presentation/view/sidemenu/morcha.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_Organizations.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_description.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_foundations.dart';
@@ -154,6 +155,30 @@ class MenuBarScreen extends StatelessWidget {
                                     type: PageTransitionType.rightToLeft,
                                     duration: Duration(milliseconds: 700),
                                     child: AllVideo(),
+                                  ),
+                                );
+                              }),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: const Divider(
+                            color: Colors.grey,
+                            thickness: .1,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DrawerItem(
+                              icon: Icons.search,
+                              title: "Morcha",
+                              onTap: () 
+                              {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    duration: Duration(milliseconds: 700),
+                                    child: ApsMorcha(),
                                   ),
                                 );
                               }),

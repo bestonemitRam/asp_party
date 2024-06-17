@@ -19,14 +19,21 @@ class MyController extends GetxController {
     super.onInit();
   }
 
-  void fetchData() async {
+  void fetchData() async 
+  {
     try {
       myData.value = await _dataService.fetchData();
       videoList.value = await _dataService.fetchDataFromVideo();
-    } catch (e) {}
-  }
+    } catch (e) {
 
-  Future<List<dynamic>> fetchTweetsByUsername(String username) async {
+    }
+  }
+  
+
+
+
+  Future<List<dynamic>> fetchTweetsByUsername(String username) async 
+  {
     final String bearerToken = dotenv.env['TWITTER_BEARER_TOKEN']!;
     final String url =
         "https://api.twitter.com/2/tweets/search/recent?query=from:$username&tweet.fields=created_at,author_id";

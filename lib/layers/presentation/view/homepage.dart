@@ -3,7 +3,7 @@
 import 'package:aps_party/layers/presentation/view/addpage.dart';
 import 'package:aps_party/layers/presentation/view/hom.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/live.dart';
-import 'package:aps_party/layers/presentation/view/reels.dart';
+import 'package:aps_party/layers/presentation/view/app_live_video.dart';
 import 'package:aps_party/layers/presentation/view/all_video.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/about_party.dart';
 import 'package:aps_party/layers/presentation/view/userprofile.dart';
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     DraggableWidget(),
     AllVideo(),
     LiveVideo(),
-    Reels(),
+    AppLiveVideo(),
     //UserProfile()
     // Container()
   ];

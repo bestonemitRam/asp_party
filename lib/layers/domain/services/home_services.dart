@@ -8,12 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DataService {
   DocumentSnapshot? _lastDocument;
   List<PartyAgendaModel> data = [];
-   List<VideoMode> video_data = [];
+  List<VideoMode> video_data = [];
 
-  
   Future<List<PartyAgendaModel>> fetchData() async {
     try {
-      print("lkdjfgjkfjh");
       //  AppHelper.language = LanguageModel.languageList()[i].languageCode;
 
       CollectionReference myCollection =
@@ -38,26 +36,20 @@ class DataService {
     }
   }
 
-
-
-
- // videos
-  Future<List<VideoMode>> fetchDataFromVideo() async 
-  {
+  // videos
+  Future<List<VideoMode>> fetchDataFromVideo() async {
     try {
-      print("lkdjfgjkfjh");
-      //  AppHelper.language = LanguageModel.languageList()[i].languageCode;
-
-      CollectionReference myCollection =FirebaseFirestore.instance.collection('videos');
+      CollectionReference myCollection =
+          FirebaseFirestore.instance.collection('videos');
       QuerySnapshot snapshot = await myCollection.get();
 
-      if (snapshot.docs.isNotEmpty) 
-      {
+      if (snapshot.docs.isNotEmpty) {
         _lastDocument = snapshot.docs.last;
-       video_data = snapshot.docs.map((doc) => VideoMode(
-         title: doc['title'],
-               video_url: doc['video_url'],
-                     description: doc['description'],
+        video_data = snapshot.docs
+            .map((doc) => VideoMode(
+                  title: doc['title'],
+                  video_url: doc['video_url'],
+                  description: doc['description'],
                 ))
             .toList();
       }
@@ -69,5 +61,29 @@ class DataService {
     }
   }
 
+  Future<List<VideoMode>> fetchDataFromVideotype(String type) async {
+    print("dkjhgkjdfgkfdhg");
+    try {
+      List<VideoMode> video_data = [];
+      CollectionReference myCollection =
+          FirebaseFirestore.instance.collection(type);
+      QuerySnapshot snapshot = await myCollection.get();
 
+      if (snapshot.docs.isNotEmpty) {
+        _lastDocument = snapshot.docs.last;
+        video_data = snapshot.docs
+            .map((doc) => VideoMode(
+                  title: doc['title'],
+                  video_url: doc['video_url'],
+                  description: doc['description'],
+                ))
+            .toList();
+      }
+
+      print("fdgdfdfggdfg ${video_data.length} ");
+      return video_data;
+    } catch (e) {
+      throw e;
+    }
+  }
 }
