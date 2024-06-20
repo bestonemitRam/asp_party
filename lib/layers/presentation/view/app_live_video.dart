@@ -1,6 +1,7 @@
 import 'package:aps_party/layers/data/utils/app_color.dart';
 import 'package:aps_party/layers/presentation/view/all_video.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/asp_video.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/bab_saheb_video.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/bjp_video.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/bsp_video.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/congres_video.dart';
@@ -28,7 +29,7 @@ class _AppLiveVideoState extends State<AppLiveVideo>
     super.initState();
     controller.fetchData("livevideo");
 
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
   }
 
   @override
@@ -40,27 +41,38 @@ class _AppLiveVideoState extends State<AppLiveVideo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primarycolor,
+        toolbarHeight: 2,
+      ),
       body: Column(
         children: [
-          SizedBox(height: 50),
-          // SingleLiveVideo(
-          //     video: "video",
-          //     date: "date",
-          //     title: "title",
-          //     description: "description"),
-          TabBar(
-            controller: _tabController,
-            tabs: [
-              Tab(text: 'Leader'),
-              Tab(text: 'BSP'),
-              Tab(text: 'BJP'),
-              Tab(text: 'Congres'),
-            ],
+          Container(
+            color: AppColors.primarycolor,
+            child: TabBar(
+              controller: _tabController,
+              labelColor: AppColors.greyColor,
+              unselectedLabelColor: AppColors.whiteColor,
+              isScrollable: true,
+              tabs: [
+                Tab(text: 'Baba'),
+                Tab(text: 'Leader'),
+                Tab(text: 'BSP'),
+                Tab(text: 'BJP'),
+                Tab(text: 'Congres'),
+              ],
+            ),
           ),
           Flexible(
             child: TabBarView(
               controller: _tabController,
-              children: [ASPVideo(), BSPVideo(), BJPVideo(), CongresVideo()],
+              children: [
+                BabaSaheb(),
+                ASPVideo(),
+                BSPVideo(),
+                BJPVideo(),
+                CongresVideo()
+              ],
             ),
           ),
         ],

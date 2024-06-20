@@ -42,6 +42,8 @@ class _DraggableWidgetState extends State<DraggableWidget> {
     });
   }
 
+  double newY = 0.0;
+
   var breakingNews = [
     "नगीना लोकसभा से प्रत्यासी चंद्रशेखर आज़ाद रावण ने अपना ब्यौरा प्रस्तुत किया",
     " : नगीना लोकसभा क्षेत्र में डोर टू डोर जनसंपर्क कर जनता से आशीर्वाद",
@@ -240,8 +242,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                     top: 37.h,
                     left: 0,
                     right: 0,
-                    child:
-                     Container(
+                    child: Container(
                         height: 11.h,
                         margin: const EdgeInsets.only(left: 5, right: 5),
                         decoration: BoxDecoration(
@@ -275,7 +276,6 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                             ),
                           ],
                         )),
-                 
                   ),
                   Obx(
                     () => myController.myData.isNotEmpty
@@ -311,8 +311,10 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                 onPanUpdate: (details) {
                   //xPosition += details.delta.dx;
                   double newX = xPosition + details.delta.dx;
-                  double newY = yPosition + details.delta.dy;
+                  newY = yPosition + details.delta.dy;
                   // yPosition += details.delta.dy;
+
+                  print("djshfgkhjdfgj  ${newX}  ${newY}");
 
                   if (newX >= 0 &&
                       newX <= screenWidth - 50 &&
@@ -325,7 +327,9 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                   }
                 },
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
+                  width: newY > 50
+                      ? MediaQuery.of(context).size.width / 2
+                      : MediaQuery.of(context).size.width,
                   //height: 250,
                   color: Colors.amber,
                   child: Stack(

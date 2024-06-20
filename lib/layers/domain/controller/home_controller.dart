@@ -15,42 +15,63 @@ class MyController extends GetxController {
   @override
   void onInit() {
     fetchData();
-    fetchTweetsByUsername('BhimArmyChief');
+    getUserTweets('BhimArmyChief');
     super.onInit();
   }
 
-  void fetchData() async 
-  {
+  void fetchData() async {
     try {
       myData.value = await _dataService.fetchData();
       videoList.value = await _dataService.fetchDataFromVideo();
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
-  
 
+  // Future<List<dynamic>> fetchTweetsByUsername(String username) async
+  // {
+  //   final String bearerToken = dotenv.env['TWITTER_BEARER_TOKEN']!;
+  //   final String url =
+  //       "https://api.twitter.com/2/tweets/search/recent?query=from:$username&tweet.fields=created_at,author_id";
 
+  //   final response = await http.get(
+  //     Uri.parse(url),
+  //     headers: {
+  //       'Authorization': 'Bearer $bearerToken',
+  //     },
+  //   );
 
-  Future<List<dynamic>> fetchTweetsByUsername(String username) async 
-  {
-    final String bearerToken = dotenv.env['TWITTER_BEARER_TOKEN']!;
-    final String url =
-        "https://api.twitter.com/2/tweets/search/recent?query=from:$username&tweet.fields=created_at,author_id";
+  //   if (response.statusCode == 200) {
+  //     print("dshgidfugu");
 
+  //     return json.decode(response.body)['data'];
+  //   } else {
+  //     throw Exception('Failed to load tweets');
+  //   }
+  // }
+
+  final String _baseUrl = "https://api.twitter.com/2";
+  final String _apiKey = dotenv.env['API_KEY']!;
+  final String _apiKeySecret = dotenv.env['API_KEY_SECRET']!;
+  final String _accessToken = dotenv.env['ACCESS_TOKEN']!;
+  final String _accessTokenSecret = dotenv.env['ACCESS_TOKEN_SECRET']!;
+
+  Future<List<dynamic>> getUserTweets(String username) async {
+    print("kdjfhgkfghk  ${username}");
+    final url = Uri.parse("$_baseUrl/tweets?screen_name=$username&count=10");
     final response = await http.get(
-      Uri.parse(url),
+      url,
       headers: {
-        'Authorization': 'Bearer $bearerToken',
+        'Authorization': 'Bearer $_accessToken',
       },
     );
-
+    print("dfsgdsfgdsfgdf  ${response.body}");
     if (response.statusCode == 200) {
-      print("dshgidfugu");
-
-      return json.decode(response.body)['data'];
+      print("success  ${username}");
+      final data = jsonDecode(response.body);
+      return data['statuses'];
     } else {
-      throw Exception('Failed to load tweets');
+      print("dfsgsdfgsdfgdsfgdsfg  ${username}");
+      print("dsfsdfsdfdfgdfgdfgdfgdfg  ${username}");
+      throw Exception("Failed to load tweets");
     }
   }
 }

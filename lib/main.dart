@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -18,9 +19,18 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("dsfmlkdsfglk ${message.data}");
 }
 
+final FlutterTts flutterTts = FlutterTts();
+
+void _initializeTts() {
+  flutterTts.setLanguage("hi-IN");
+  flutterTts.setPitch(1.0);
+  flutterTts.setSpeechRate(0.5);
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  _initializeTts();
 
   try {
     await dotenv.load(fileName: ".env");
@@ -33,14 +43,12 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   allInitialize();
-   SystemChrome.setPreferredOrientations([
+  SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) {
     runApp(const MyApp());
   });
-
- 
 }
 
 Future<void> allInitialize() async {
@@ -74,72 +82,3 @@ class MyApp extends StatelessWidget {
     });
   }
 }
-
-
-
-
-
-// import 'package:flutter/material.dart';
-
-// void main() {
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Scaffold(
-//         appBar: AppBar(title: Text('Draggable Widget Example')),
-//         body: DraggableWidget(),
-//       ),
-//     );
-//   }
-// }
-
-// class DraggableWidget extends StatefulWidget {
-//   @override
-//   _DraggableWidgetState createState() => _DraggableWidgetState();
-// }
-
-// class _DraggableWidgetState extends State<DraggableWidget> {
-//   double xPosition = 100;
-//   double yPosition = 100;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return
-//      Scaffold(
-//       body: SingleChildScrollView(
-//         child: SizedBox(
-//           height: 2000,
-//           child: Stack(
-//             children: [
-//               Positioned(
-//                 left: xPosition,
-//                 top: yPosition,
-//                 child: GestureDetector(
-//                   onPanUpdate: (details) {
-//                     setState(() {
-//                       xPosition += details.delta.dx;
-//                       yPosition += details.delta.dy;
-//                     });
-//                   },
-//                   child: Container(
-//                     width: 330,
-//                     height: 100,
-//                     color: Colors.blue,
-//                     child: Center(child: Text('Drag me')),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
- 
-//   }
-// }
-
-

@@ -8,6 +8,7 @@ import 'package:aps_party/layers/presentation/view/sidemenu/party_Organizations.
 import 'package:aps_party/layers/presentation/view/sidemenu/party_description.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_foundations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MenuBarScreen extends StatelessWidget {
@@ -17,37 +18,37 @@ class MenuBarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       width: 280,
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(4),
-                bottomRight: Radius.circular(4),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(4),
+            bottomRight: Radius.circular(4),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(top: 7, right: 2, left: 2, bottom: 5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: CircleAvatar(
+                    radius: 40,
+                    backgroundImage: AssetImage(AppImages.dr),
+                  ),
+                ),
               ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(top: 7, right: 2, left: 2, bottom: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage(AppImages.dr),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 1,
-                  ),
-                  Divider(
-                    height: 1,
-                    // color: AppColors.greyColor,
-                  ),
-                  Padding(
+              SizedBox(
+                height: 1,
+              ),
+              Divider(
+                height: 1,
+                // color: AppColors.greyColor,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
                     padding: EdgeInsets.only(
                       top: 1,
                       right: 1,
@@ -171,8 +172,7 @@ class MenuBarScreen extends StatelessWidget {
                           child: DrawerItem(
                               icon: Icons.search,
                               title: "Morcha",
-                              onTap: () 
-                              {
+                              onTap: () {
                                 Navigator.push(
                                   context,
                                   PageTransition(
@@ -251,16 +251,11 @@ class MenuBarScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Spacer(),
-                  const Divider(
-                    color: Colors.black12,
-                    thickness: .1,
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

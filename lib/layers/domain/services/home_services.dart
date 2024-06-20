@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:aps_party/layers/domain/entity/morcha_model.dart';
+import 'package:aps_party/layers/domain/entity/news.dart';
 import 'package:aps_party/layers/domain/entity/party_agenda.dart';
 import 'package:aps_party/layers/domain/entity/video_model.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/agenda.dart';
@@ -86,4 +88,66 @@ class DataService {
       throw e;
     }
   }
+
+  Future<List<NewsModel>> fetchNews() async 
+  {
+    print("dkjhgkjdfgkfdhg");
+    try {
+      List<NewsModel> video_data = [];
+      CollectionReference myCollection =
+          FirebaseFirestore.instance.collection('aspnews');
+      QuerySnapshot snapshot = await myCollection.get();
+
+      if (snapshot.docs.isNotEmpty) {
+        _lastDocument = snapshot.docs.last;
+        video_data = snapshot.docs
+            .map((doc) => NewsModel(
+                  title: doc['title'],
+                  img_url: doc['img_url'],
+                  description: doc['description'],
+                  date: doc['date']
+                ))
+            .toList();
+      }
+
+      print("fdgdfdfggdfg ${video_data.length} ");
+      return video_data;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+   Future<List<MorchaModel>> fetchMorchaData() async 
+  {
+
+    try {
+      List<MorchaModel> video_data = [];
+      CollectionReference myCollection =
+          FirebaseFirestore.instance.collection('morcha');
+      QuerySnapshot snapshot = await myCollection.get();
+
+      if (snapshot.docs.isNotEmpty) {
+        _lastDocument = snapshot.docs.last;
+        video_data = snapshot.docs
+            .map((doc) => MorchaModel(
+                  title: doc['title'],
+                  img_url: doc['img_url'],
+                  description: doc['description'],
+                  date: doc['date'],
+                    link_url: doc['link_url'],
+                      name: doc['name'],
+                        city: doc['city'],
+                ))
+            .toList();
+      }
+
+      print("fdgdfdfggdfg ${video_data.length} ");
+      return video_data;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+
+  
 }

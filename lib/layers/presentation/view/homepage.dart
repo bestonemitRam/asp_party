@@ -2,7 +2,7 @@
 
 import 'package:aps_party/layers/presentation/view/addpage.dart';
 import 'package:aps_party/layers/presentation/view/hom.dart';
-import 'package:aps_party/layers/presentation/view/home_widget/live.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/news_screen.dart';
 import 'package:aps_party/layers/presentation/view/app_live_video.dart';
 import 'package:aps_party/layers/presentation/view/all_video.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/about_party.dart';
@@ -36,10 +36,9 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> pages = [
     DraggableWidget(),
     AllVideo(),
-    LiveVideo(),
+    NewsScreen(),
     AppLiveVideo(),
-    //UserProfile()
-    // Container()
+
   ];
   void shareApp() {
     Share.share('Check out this awesome Flutter package!',
@@ -79,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                   Icons.add,
                   color: iconcolor,
                 ),
-                label: "Add"),
+                label: "News"),
             BottomNavigationBarItem(
                 icon: ImageIcon(
                   color: iconcolor,

@@ -22,6 +22,7 @@ class _AllVideoState extends State<AllVideo> {
 
   @override
   Widget build(BuildContext context) {
+    var orientation = MediaQuery.of(context).orientation;
     return Scaffold(
         body: Obx(() => myController.videoList.isNotEmpty
             ? SingleChildScrollView(
@@ -52,11 +53,12 @@ class _AllVideoState extends State<AllVideo> {
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             primary: false,
-                            padding: const EdgeInsets.only(
-                                left: 0, right: 0, top: 0),
-                            // crossAxisSpacing: 1.5,
+                            padding: const EdgeInsets.only(  left: 0, right: 0, top: 0),
+                             // crossAxisSpacing: 1.5,
                             // mainAxisSpacing: 18,
-                            crossAxisCount: 2,
+                            crossAxisCount:
+                                orientation == Orientation.portrait ? 2 : 4,
+                            //  crossAxisCount: 2,
                             children: List.generate(
                                 myController.videoList.value.length, (index) {
                               return myController.videoList.value[index].title!
@@ -89,8 +91,5 @@ class _AllVideoState extends State<AllVideo> {
                 ),
               )
             : Center()));
- 
-
   }
 }
-
