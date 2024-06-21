@@ -73,19 +73,8 @@ class _VideoPlyerScreensState extends State<VideoPlyerScreens> {
                   onReady: () {},
                 ),
               ),
-              // Positioned(
-              //     top: 1,
-              //     left: 10,
-              //     child: InkWell(
-              //         onTap: () {
-              //           Navigator.pop(context);
-              //         },
-              //         child: Icon(
-              //           Icons.clear,
-              //           weight: Device.width,
-              //           size: 40,
-              //           color: Colors.white,
-              //         )))
+              
+             
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 0, vertical: 10),

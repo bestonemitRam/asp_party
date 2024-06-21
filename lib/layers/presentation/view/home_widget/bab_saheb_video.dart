@@ -1,4 +1,5 @@
 import 'package:aps_party/layers/domain/controller/home_controller.dart';
+import 'package:aps_party/layers/domain/controller/video_controller.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/video_widget.dart';
 import 'package:aps_party/layers/presentation/view/video_player/video_player_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +16,12 @@ class BabaSaheb extends StatefulWidget {
 }
 
 class _BJPVideoState extends State<BabaSaheb> {
-  final MyController myController = Get.put(MyController());
+  final VideoController myController = Get.put(VideoController());
 
   final seachkController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    myController.fetchData('babasahab');
     return Obx(() => myController.videoList.isNotEmpty
         ? SizedBox(
             child: ListView.builder(

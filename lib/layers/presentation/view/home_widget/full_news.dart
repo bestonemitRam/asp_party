@@ -4,6 +4,7 @@ import 'package:aps_party/layers/data/utils/app_color.dart';
 import 'package:aps_party/layers/domain/entity/banner_member.dart';
 import 'package:aps_party/layers/domain/entity/news.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/WebviewWidgetUIScreen.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/loaderscreennew.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,16 +46,20 @@ class _MyWidgetState extends State<FullNews> {
                       borderRadius: BorderRadius.circular(10)),
                 ),
                 SizedBox(height: h * 0.04),
-                Container(
-                  height: MediaQuery.of(context).size.height / 4,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
-                      image: DecorationImage(
-                          image: NetworkImage(widget.list.img_url),
-                          fit: BoxFit.fill)),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.fill,
+                    imageUrl: widget.list.img_url.toString(),
+                    // height: 200,
+                    width: double.infinity,
+                    placeholder: (context, url) =>  Center(child: LoaderScreennew()),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
                 ),
+
+              
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(

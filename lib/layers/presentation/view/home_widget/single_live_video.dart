@@ -1,5 +1,6 @@
 import 'package:aps_party/layers/data/utils/app_color.dart';
 import 'package:aps_party/layers/domain/entity/video_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -42,6 +43,9 @@ class SingleLiveVideo extends StatelessWidget {
                           image: NetworkImage(getThumbnailUrl(video)),
                           fit: BoxFit.fill)),
                 ),
+              
+
+                
                 Positioned(
                   left: MediaQuery.of(context).size.width / 2.5,
                   top: MediaQuery.of(context).size.height / 10,

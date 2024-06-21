@@ -4,6 +4,7 @@ import 'package:aps_party/layers/domain/controller/video_controller.dart';
 import 'package:aps_party/layers/domain/entity/banner_member.dart';
 import 'package:aps_party/layers/domain/entity/news.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/full_news.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/loaderscreennew.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/member_description.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_Organizations.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_agenda_screen.dart';
@@ -11,6 +12,7 @@ import 'package:aps_party/layers/presentation/view/sidemenu/party_description.da
 import 'package:aps_party/layers/presentation/view/sidemenu/party_foundations.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_history.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/party_president.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -75,15 +77,18 @@ class _NewsScreenState extends State<NewsScreen>
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 4,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
-                    image: DecorationImage(
-                        image: NetworkImage(list.img_url), fit: BoxFit.fill)),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: CachedNetworkImage(
+                  fit: BoxFit.fill,
+                  imageUrl: list.img_url.toString(),
+                  // height: 200,
+                  width: double.infinity,
+                  placeholder: (context, url) => const  Center(child: LoaderScreennew()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
+             
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: Text(

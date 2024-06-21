@@ -17,8 +17,14 @@ class MemberDescription extends StatefulWidget {
 
 class _MemberDescriptionState extends State<MemberDescription> {
   bool isplay = false;
+
   Future<void> _speak(String text) async {
     await flutterTts.speak(text);
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        isplay = false;
+      });
+    });
   }
 
   Future<void> _stop() async {
@@ -74,7 +80,7 @@ class _MemberDescriptionState extends State<MemberDescription> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
-                          child: isplay
+                          child: !isplay
                               ? InkWell(
                                   onTap: () {
                                     _speak(widget.userStory.description);
@@ -88,9 +94,9 @@ class _MemberDescriptionState extends State<MemberDescription> {
                                   ))
                               : InkWell(
                                   onTap: () {
-                                    _speak(widget.userStory.description);
+                                    _stop();
                                     setState(() {
-                                      isplay = true;
+                                      isplay = false;
                                     });
                                   },
                                   child: Icon(
@@ -100,6 +106,7 @@ class _MemberDescriptionState extends State<MemberDescription> {
                         ),
                       ),
                     ),
+                    
                     Positioned(
                       left: 1.h,
                       bottom: 2.h,

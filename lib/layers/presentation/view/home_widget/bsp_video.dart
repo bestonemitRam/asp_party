@@ -43,8 +43,7 @@ class _MyWidgetState extends State<BSPVideo> {
                         ),
                       );
                     },
-                    child:
-                        VideoWidget(video: myController.videoList.value[index]),
+                    child:VideoWidget(video: myController.videoList.value[index]),
                   );
                 }),
            

@@ -1,16 +1,19 @@
 import 'package:aps_party/layers/data/utils/app_color.dart';
+import 'package:aps_party/layers/data/utils/app_images.dart';
 import 'package:aps_party/layers/domain/controller/home_controller.dart';
 import 'package:aps_party/layers/domain/entity/banner_member.dart';
 import 'package:aps_party/layers/domain/entity/party_agenda.dart';
 import 'package:aps_party/layers/domain/entity/profiledata.dart';
 import 'package:aps_party/layers/domain/entity/video_model.dart';
-import 'package:aps_party/layers/presentation/view/hom.dart';
+
 import 'package:aps_party/layers/presentation/view/home_widget/agenda.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/member_description.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/treanding%20_photos.dart';
 import 'package:aps_party/layers/presentation/view/home_widget/videos.dart';
 import 'package:aps_party/layers/presentation/view/sidemenu/drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -18,15 +21,17 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/instance_manager.dart';
 import 'package:marquee/marquee.dart';
 import 'package:marquee_list/marquee_list.dart';
+import 'package:package_info/package_info.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class DraggableWidget extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _DraggableWidgetState createState() => _DraggableWidgetState();
+  _HomeState createState() => _HomeState();
 }
 
-class _DraggableWidgetState extends State<DraggableWidget> {
+class _HomeState extends State<Home> {
   final MyController myController = Get.put(MyController());
   double xPosition = 0;
   double yPosition = 0;
@@ -80,6 +85,13 @@ class _DraggableWidgetState extends State<DraggableWidget> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    setupRemoteConfig();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -90,25 +102,12 @@ class _DraggableWidgetState extends State<DraggableWidget> {
         appBar: AppBar(
           // backgroundColor: Colors.black,
           title: Text(
-            "ASP  ",
+            "ASP Party ",
             style: TextStyle(
                 fontFamily: 'Fontspring-DEMO-blue_vinyl_regular_ps_ot',
+                color: AppColors.primarycolor,
                 fontSize: 30),
           ),
-          actions: [
-            Row(
-              children: [
-                Icon(Icons.favorite_border_outlined),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ImageIcon(
-                    AssetImage('assets/images/chat.png'),
-                    size: 20,
-                  ),
-                )
-              ],
-            )
-          ],
         ),
         body: Stack(children: [
           SingleChildScrollView(
@@ -387,5 +386,113 @@ class _DraggableWidgetState extends State<DraggableWidget> {
               ),
             ),
         ]));
+  }
+
+  setupRemoteConfig() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    final remoteConfig = FirebaseRemoteConfig.instance;
+
+    print("kjdhgfkbkdfg  ${buildNumber}");
+
+    remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: Duration(seconds: 10),
+        minimumFetchInterval: Duration.zero));
+    await remoteConfig.fetch();
+    await remoteConfig.activate();
+    print(
+        "kjdhgfkbkdfg  ${remoteConfig.getValue(AppImages.appUpdate).asBool()}  ${remoteConfig.getValue(AppImages.Version).asString()}");
+    if (remoteConfig.getValue(AppImages.appUpdate).asBool()) {
+      if (version != remoteConfig.getValue(AppImages.Version).asString() &&
+          remoteConfig.getValue(AppImages.forceFully).asBool()) {
+        _forceFullyupdate(remoteConfig.getString(AppImages.updateUrl),
+            remoteConfig.getString(AppImages.updateMessage));
+        return;
+      }
+      if (version != remoteConfig.getValue(AppImages.Version).asString()) {
+        _update(remoteConfig.getString(AppImages.updateUrl),
+            remoteConfig.getString(AppImages.updateMessage));
+        return;
+      }
+    }
+  }
+
+  void _update(String url, String Message) {
+    showCupertinoDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return CupertinoAlertDialog(
+            title: const Text('Update ! '),
+            content: Text(Message),
+            actions: [
+              CupertinoDialogAction(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text('May be later'),
+                isDefaultAction: true,
+                isDestructiveAction: true,
+              ),
+              CupertinoDialogAction(
+                onPressed: () {
+                  _lunchInBrowser(url);
+                },
+                child: const Text('Update'),
+                isDefaultAction: false,
+                isDestructiveAction: false,
+              )
+            ],
+          );
+        });
+  }
+
+  void _forceFullyupdate(
+    String url,
+    String Message,
+  ) {
+    showCupertinoDialog(
+        context: context!,
+        barrierDismissible: true,
+        builder: (BuildContext ctx) {
+          return WillPopScope(
+            onWillPop: () async {
+              return false;
+            },
+            child: CupertinoAlertDialog(
+              insetAnimationCurve: Curves.easeInOutCubic,
+              insetAnimationDuration: Duration(milliseconds: 600),
+              title: const Text(
+                'Update required !',
+              ),
+              content: Text(Message),
+              actions: [
+                // The "Yes" button
+
+                // The "No" button
+                CupertinoDialogAction(
+                  onPressed: () {
+                    _lunchInBrowser(url);
+                  },
+                  child: const Text('Update'),
+                  isDefaultAction: false,
+                  isDestructiveAction: false,
+                )
+              ],
+            ),
+          );
+        });
+  }
+
+  Future<void> _lunchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url,
+          forceSafariVC: false,
+          forceWebView: false,
+          headers: <String, String>{"headesr_key": "headers_value"});
+    } else {
+      throw "url not lunched $url";
+    }
   }
 }

@@ -27,5 +27,14 @@ class AppImages {
   static String savitribaiphule = rootimg + "savitribaiphule.jpg";
   static String Bhim_Army_Bharat_Ekta_Mission_logo = rootimg + "Bhim_Army_Bharat_Ekta_Mission_logo.jpg";
 
+   
+   
+   
+   static final String forceFully = "forceFully";
+  static final String Version = "Version";
+  static final String appUpdate = "appUpdate";
+  static final String updateUrl = "updateUrl";
+  static final String updateMessage = "updateMessage";
+
   
 }

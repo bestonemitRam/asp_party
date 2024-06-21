@@ -2,8 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
  package="com.app.asp_party"
 >
+
+   <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="aps_party"
+    android:enableOnBackInvokedCallback="true"
+        android:label="ASP Party"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

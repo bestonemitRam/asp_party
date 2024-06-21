@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:aps_party/layers/data/utils/app_color.dart';
 import 'package:aps_party/layers/data/utils/app_images.dart';
 import 'package:aps_party/layers/domain/entity/banner_member.dart';
+import 'package:aps_party/main.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -15,6 +16,22 @@ class PartyHistory extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<PartyHistory> {
+  bool isplay = false;
+
+  String para = "Party History भीम आर्मी भारत एकता मिशन की स्थापना 2015 में पश्चिमी यूपी के सहारनपुर जिले में हुई थी। जाति से प्रेरित हमले महत्वपूर्ण दलित शख्सियतों की मूर्तियों को अपवित्र किया गया हिंदू दक्षिणपंथी ताकतों द्वारा दंगे और संपत्ति का विनाश सहारनपुर में बड़े पैमाने पर हुआ। भीम आर्मी ने खुद को दलित दावे के दबाव समूह के रूप में तैयार किया और यह स्पष्ट कर दिया कि दलितों पर दुर्व्यवहार और हिंसा अब बर्दाश्त नहीं की जाएगी और दलितों के साथ सम्मान के साथ व्यवहार किया जाना चाहिए। समय के साथ भीम आर्मी समग्र रूप से समुदाय के उत्थान की दिशा में काम करने के लिए विकसित हुई। खुद को और समुदाय को शिक्षित करने के बाबासाहेब के आह्वान को ध्यान में रखते हुए भीम आर्मी ने भीम पाठशाला की स्थापना की जो बच्चों के लिए स्कूल के बाद मुफ्त ट्यूशन सेंटर है। इस अवधारणा ने जड़ें जमा लीं और पूरे पश्चिमी यूपी में फैल गईं। सरकारी संस्थानों की शिक्षा नीतियों के बावजूद दलित बच्चों को अक्सर कक्षाओं में भेदभावपूर्ण व्यवहार का अनुभव होता है जिसके कारण वे सामाजिक और शैक्षणिक रूप से पीछे रह जाते हैं। भीम पाठशाला जिसका संरक्षण ज्यादातर दलित बच्चों द्वारा किया जाता है रिश्तेदारी और सीखने का स्थान है शिक्षक स्वयंसेवक हैं और संसाधन समुदाय के भीतर से ही प्राप्त होते हैं। इसके अनूठे शिक्षण मॉडल में स्वयंसेवी शिक्षक बड़े बच्चों को पढ़ाते हैं जो बदले में छोटे बच्चों को पढ़ाते हैं। इस पहल ने भाग लेने वाले बच्चों की साक्षरता और शैक्षणिक प्रदर्शन को बेहतर बनाने में काफी मदद की है। केंद्र बच्चों को दलित समुदाय के प्रेरणादायक शख्सियतों गीतों और पौराणिक कथाओं से भी परिचित कराते हैं और संस्कृति में व्याप्त वर्चस्ववादी ब्राह्मणवादी कथा के लिए एक वैकल्पिक संस्कृति की पेशकश करते हैं जिसका वे अन्यथा सामना करते हैं। सहारनपुर में ठाकुर जाति के अत्याचारों के खिलाफ दिल्ली के जंतर-मंतर पर एक रैली के बाद भीम आर्मी के संस्थापक चन्द्रशेखर आजाद को कठोर राष्ट्रीय सुरक्षा कानून के तहत हिरासत में लिया गया जो 15 महीने तक बिना मुकदमे के जेल की अनुमति देता है। 2019 में भीम आर्मी दो महत्वपूर्ण विरोध प्रदर्शनों का हिस्सा थी  एक दिल्ली में रविदास मंदिर के विध्वंस के खिलाफ और नागरिकता संशोधन अधिनियम और राष्ट्रीय नागरिकता रजिस्टर विरोधी का भी समर्थन किया जिसने साल के अंत में देशव्यापी आंदोलन को जन्म दिया। चन्द्रशेखर आज़ाद ने सीएए एनआरसी विरोध प्रदर्शन के दौरान जामिया मिलिया इस्लामिया विश्वविद्यालय के छात्रों और शाहीन बाग की महिलाओं को भी अपना समर्थन दिया।";
+  Future<void> _speak(String p) async {
+    await flutterTts.speak(p);
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        isplay = false;
+      });
+    });
+  }
+
+  Future<void> _stop() async {
+    await flutterTts.stop();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double h = MediaQuery.of(context).size.height;
@@ -55,6 +72,40 @@ class _MyWidgetState extends State<PartyHistory> {
                                       image: DecorationImage(
                                           image: AssetImage(AppImages.chandra),
                                           fit: BoxFit.fill)),
+                                ),
+                              ),
+                              Positioned(
+                                right: 1.h,
+                                bottom: 2.h,
+                                child: Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 10),
+                                    child: !isplay
+                                        ? InkWell(
+                                            onTap: () {
+                                              _speak(para.toString());
+                                              setState(() {
+                                                isplay = true;
+                                              });
+                                            },
+                                            child: Icon(
+                                              Icons.play_circle_fill_outlined,
+                                              color: Colors.white,
+                                            ))
+                                        : InkWell(
+                                            onTap: () {
+                                              _stop();
+                                              setState(() {
+                                                isplay = false;
+                                              });
+                                            },
+                                            child: Icon(
+                                              Icons
+                                                  .play_circle_outline_outlined,
+                                              color: Colors.green,
+                                            )),
+                                  ),
                                 ),
                               ),
                               Positioned(

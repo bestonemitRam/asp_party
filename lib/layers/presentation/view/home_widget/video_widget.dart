@@ -1,5 +1,7 @@
 import 'package:aps_party/layers/data/utils/app_color.dart';
 import 'package:aps_party/layers/domain/entity/video_model.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/loaderscreennew.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -28,11 +30,24 @@ class VideoWidget extends StatelessWidget {
                   height: MediaQuery.of(context).size.height / 4,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.white,
-                      image: DecorationImage(
-                          image: NetworkImage(getThumbnailUrl(video.video_url)),
-                          fit: BoxFit.fill)),
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                    // image: DecorationImage(
+                    //     image: NetworkImage(getThumbnailUrl(video.video_url)),
+                    //     fit: BoxFit.fill)
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      fit: BoxFit.fill,
+                      imageUrl: getThumbnailUrl(video.video_url),
+                      width: double.infinity,
+                      placeholder: (context, url) =>
+                          Center(child: Center(child: LoaderScreennew())),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                  ),
                 ),
                 Positioned(
                   left: MediaQuery.of(context).size.width / 2.5,

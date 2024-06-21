@@ -1,6 +1,7 @@
 import 'package:aps_party/layers/domain/entity/banner_member.dart';
 import 'package:aps_party/layers/domain/entity/party_agenda.dart';
 import 'package:aps_party/layers/domain/entity/profiledata.dart';
+import 'package:aps_party/layers/presentation/view/home_widget/loaderscreennew.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -32,7 +33,7 @@ class PartyAgenda extends StatelessWidget {
               // height: 200,
               width: double.infinity,
               placeholder: (context, url) =>
-                  Center(child: const CircularProgressIndicator()),
+                  Center(child: LoaderScreennew()),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
