@@ -9,7 +9,9 @@ import 'package:aps_party/layers/presentation/view/sidemenu/party_description.da
 import 'package:aps_party/layers/presentation/view/sidemenu/party_foundations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MenuBarScreen extends StatelessWidget {
   const MenuBarScreen({Key? key}) : super(key: key);
@@ -247,7 +249,95 @@ class MenuBarScreen extends StatelessWidget {
                                   ),
                                 );
                               }),
-                        )
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: const Divider(
+                            color: Colors.grey,
+                            thickness: .1,
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        _lunchInBrowser('');
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 12,
+                                        backgroundImage:
+                                            AssetImage(AppImages.instagram),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                            _lunchInBrowser('');
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 12,
+                                        backgroundImage:
+                                            AssetImage(AppImages.twitter),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                            _lunchInBrowser('');
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 12,
+                                        backgroundImage:
+                                            AssetImage(AppImages.facebook),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                            _lunchInBrowser('');
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 12,
+                                        backgroundImage:
+                                            AssetImage(AppImages.youtube),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                            _lunchInBrowser('');
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 12,
+                                        backgroundImage:
+                                            AssetImage(AppImages.google),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ))
                       ],
                     ),
                   ),
@@ -258,5 +348,16 @@ class MenuBarScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _lunchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url,
+          forceSafariVC: false,
+          forceWebView: false,
+          headers: <String, String>{"headesr_key": "headers_value"});
+    } else {
+      throw "url not lunched $url";
+    }
   }
 }

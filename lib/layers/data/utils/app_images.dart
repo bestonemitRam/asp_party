@@ -26,6 +26,11 @@ class AppImages {
   static String gadgeji = rootimg + "gadgeji.png";
   static String savitribaiphule = rootimg + "savitribaiphule.jpg";
   static String Bhim_Army_Bharat_Ekta_Mission_logo = rootimg + "Bhim_Army_Bharat_Ekta_Mission_logo.jpg";
+   static String google = "assets/images/google.png";
+      static String facebook = "assets/images/facebook.png";
+       static String instagram = "assets/images/instagram.png";
+         static String twitter = "assets/images/twitter.png";
+           static String youtube = "assets/images/youtube.png";
 
    
    
