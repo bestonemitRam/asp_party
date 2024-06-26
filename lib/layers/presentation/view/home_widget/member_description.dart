@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class MemberDescription extends StatefulWidget {
+class MemberDescription extends StatefulWidget 
+{
   final BannerMember userStory;
   const MemberDescription({super.key, required this.userStory});
 
@@ -76,7 +77,8 @@ class _MemberDescriptionState extends State<MemberDescription> {
                     Positioned(
                       right: 1.h,
                       bottom: 2.h,
-                      child: Container(
+                      child:
+                       Container(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
@@ -105,6 +107,7 @@ class _MemberDescriptionState extends State<MemberDescription> {
                                   )),
                         ),
                       ),
+                    
                     ),
                     
                     Positioned(

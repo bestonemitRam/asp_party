@@ -9,11 +9,13 @@ class LoaderScreennew extends StatelessWidget {
   const LoaderScreennew({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Center(
       child: SizedBox(
         height: 30.h,
-        child: SpinKitCircle(itemBuilder: (_, int index) {
+        child: SpinKitCircle(itemBuilder: (_, int index) 
+        {
           return DecoratedBox(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -21,7 +23,8 @@ class LoaderScreennew extends StatelessWidget {
                   index.isEven ? AppColors.primarycolor : AppColors.greyColor,
             ),
           );
-        }),
+        }
+        ),
       ),
     );
   }

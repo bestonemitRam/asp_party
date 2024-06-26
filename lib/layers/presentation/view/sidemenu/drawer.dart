@@ -266,7 +266,8 @@ class MenuBarScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(10.0),
                                     child: InkWell(
                                       onTap: () {
-                                        _lunchInBrowser('');
+                                        _lunchInBrowser(
+                                            'https://www.instagram.com/shotNews11');
                                       },
                                       child: CircleAvatar(
                                         radius: 12,
@@ -281,7 +282,8 @@ class MenuBarScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(10.0),
                                     child: InkWell(
                                       onTap: () {
-                                            _lunchInBrowser('');
+                                        _lunchInBrowser(
+                                            'https://twitter.com/BhimArmyChief');
                                       },
                                       child: CircleAvatar(
                                         radius: 12,
@@ -296,7 +298,8 @@ class MenuBarScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(10.0),
                                     child: InkWell(
                                       onTap: () {
-                                            _lunchInBrowser('');
+                                        _lunchInBrowser(
+                                            'https://www.facebook.com/BhimArmyOfficial');
                                       },
                                       child: CircleAvatar(
                                         radius: 12,
@@ -311,7 +314,8 @@ class MenuBarScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(10.0),
                                     child: InkWell(
                                       onTap: () {
-                                            _lunchInBrowser('');
+                                        _lunchInBrowser(
+                                            'https://youtube.com/@BhimArmy__BEM');
                                       },
                                       child: CircleAvatar(
                                         radius: 12,
@@ -326,7 +330,8 @@ class MenuBarScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(10.0),
                                     child: InkWell(
                                       onTap: () {
-                                            _lunchInBrowser('');
+                                        _lunchInBrowser(
+                                            'https://aazadsamajpartyk.org/');
                                       },
                                       child: CircleAvatar(
                                         radius: 12,
@@ -358,6 +363,16 @@ class MenuBarScreen extends StatelessWidget {
           headers: <String, String>{"headesr_key": "headers_value"});
     } else {
       throw "url not lunched $url";
+    }
+  }
+
+  void _openInstagram() async {
+    const url =
+        'https://www.instagram.com/your_username'; // Replace with your Instagram profile URL
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 }
